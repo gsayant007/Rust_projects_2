@@ -1,0 +1,5 @@
+https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html
+
+https://doc.rust-lang.org/rust-by-example/hello/print.html
+
+https://nostarch.com/download/RustProgrammingLanguage2E_SampleChapter_Updated.pdf
