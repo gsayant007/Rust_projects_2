@@ -35,21 +35,26 @@ class Todo:
             else: pass
         return data1
     
-    def del_item(self,num):
+    def del_item(self):
         """delete the todo item from the list"""
         with open("./todo/todo.txt","r+") as f:
-            data1 = dict(enumerate(f.read().splitlines()))
+            data = set(f.read().splitlines())
         if self.done():
+            usr_input = str(input("Enter the task name you've completed:  "))
+            s1 = data - {self.parse_input(usr_input)}
+            with open("./todo/todo.txt","r+") as f:
+                f.truncate(0)
+                for x in s1:
+                    f.write(x)
+                    f.write("\n")
+        else:pass
 
-
-
-    def done(self,num) -> bool:
+    def done(self) -> bool:
         """add the todo item from todo.txt to done.txt
         and simultaneously delete the todo item from todo.txt"""
         print("have you completed any of the previous task?")
-        usr_input = str(input("type y or n for yes or no respectively"))
+        usr_input = str(input("type y or n for yes or no respectively:  "))
         if usr_input == "y":
-            print("completed the task")
             return True
         else:
             return False
@@ -60,3 +65,4 @@ if __name__ == "__main__":
     parse_inp = t.parse_input(s=user_inp)
     print(parse_inp)
     t.add(s=parse_inp)
+    t.del_item()
