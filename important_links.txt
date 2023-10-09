@@ -3,3 +3,9 @@ https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.h
 https://doc.rust-lang.org/rust-by-example/hello/print.html
 
 https://nostarch.com/download/RustProgrammingLanguage2E_SampleChapter_Updated.pdf
+
+https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html
+
+https://www.freecodecamp.org/news/how-to-build-a-to-do-app-with-rust/
+
+https://www.geeksforgeeks.org/how-to-make-a-todo-list-cli-application-using-python/

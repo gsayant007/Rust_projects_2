@@ -1,0 +1,41 @@
+Basic Functions of todo list are:
+
+Add a new todo
+Delete a todo
+Complete a todo
+Show remaining todos
+Show statistics of todo
+
+Note: In Windows Command Prompt to run the application → type todo or.\todo
+In shell or git bash  -->     type ./todo
+
+
+To create todo list application we have to follow these steps:
+Create a folder named todolist
+Create a file todo.py in the created folder
+If you are a window user then Create another file todo.bat file. This is a batch file. And it is used to run the python script
+If you are Linux user then create  a file named as todo.sh. This is used to run the python script.
+
+
+todo.bat:
+
+@echo off
+python3 todo.py %1 %2
+
+
+todo.sh:
+
+python todo.py "$@"
+
+Create a symbolic link to the executable file:
+
+In Windows (In command prompt or Powershell)
+
+To create a symbolic link on Windows, you’ll need to run either the Windows Command Prompt or Windows Powershell **with administrator privileges**. To do so, right-click on the icon for Command Prompt, or Powershell, and choose the _”Run as Administrator”_ option.
+
+mklink todo todo.bat
+In Linux or in the shell(as git bash)
+
+$ ln -s todo.sh todo
+
+
