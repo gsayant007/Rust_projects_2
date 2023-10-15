@@ -2,9 +2,14 @@ import datetime
 import sys
 import json
 
-class Todo:
+# def say_hi():
+#     print("hello world!")
 
-    def help(self):
+# def add(x:float,y:float):
+#     print(x+y)
+
+class Todo:
+    def printHelp(self):
         sa = """Usage :-
         $ ./todo add "todo item"  # Add a new todo
         $ ./todo ls               # Show remaining todos
@@ -12,57 +17,73 @@ class Todo:
         $ ./todo done NUMBER      # Complete a todo
         $ ./todo help             # Show usage
         $ ./todo report           # Statistics"""
-        sys.stdout.buffer.write(sa.encode('utf8'))
+        sys.stdout.buffer.write(sa.encode('utf-8'))
 
-    def parse_input(self,s:str)->str:
-        """this will parse the input from any format to a particular
-        format from the user, some limited parsing is allowed for now"""
-        return s.strip().replace(" ","").replace("  ","")
-    
-    def current_task(self):
-        """this shows the current task that is in todo.txt"""
-
-    def add(self,s:str):
-        """we will add it to todo.txt if it doesn't exist in the file else pass"""
-        with open("./todo/todo.txt","r+",encoding="utf-8") as f:
-            data = set(f.read().splitlines())  # unique set of todos
-            data1 = dict(enumerate(data))
-            print(data1)
-            if s not in data:
-                f.write(s)
+        
+    def add(self):
+        """Add a new todo
+        it will only add if you add a new unique task otherwise if the same task alrady exists in the file it will 
+        pass the add process, currently we will do it without parsing"""
+        self.printHelp()
+        usr_input = sys.argv[2]
+        with open("todo.txt","r+") as f:
+            data = f.read().splitlines()
+        if usr_input not in data:
+            with open("todo.txt","a+") as f:
+                f.write(usr_input)
                 f.write("\n")
-                print("task added!")
-            else: pass
-        return data1
-    
-    def del_item(self):
-        """delete the todo item from the list"""
-        with open("./todo/todo.txt","r+") as f:
-            data = set(f.read().splitlines())
-        if self.done():
-            usr_input = str(input("Enter the task name you've completed:  "))
-            s1 = data - {self.parse_input(usr_input)}
-            with open("./todo/todo.txt","r+") as f:
-                f.truncate(0)
-                for x in s1:
-                    f.write(x)
-                    f.write("\n")
-        else:pass
-
-    def done(self) -> bool:
-        """add the todo item from todo.txt to done.txt
-        and simultaneously delete the todo item from todo.txt"""
-        print("have you completed any of the previous task?")
-        usr_input = str(input("type y or n for yes or no respectively:  "))
-        if usr_input == "y":
-            return True
+            return self.ls()
         else:
-            return False
-            
+            return self.ls()
+        
+    def ls(self):
+        """Show remaining todos"""
+        print("you have these todos' in your list:")
+        with open("todo.txt","r+") as f:
+             print(f.read())
+
+
+    def done(self):
+        """NUMBER , Complete a todo"""
+        usr_input = sys.argv[2]
+        with open("todo.txt","r") as f:
+            data = f.read().splitlines()
+        if usr_input in data:
+            print("you have completed a task!")
+            print("deleting the task from todo list")
+            self.delete_item()
+        else:
+            print("the task that you have entered is not in the todo list, please verify!")
+
+    def delete_item(self):
+        """NUMBER ,  Delete a todo
+        this function will only be called if an user completes a task"""
+        usr_input = sys.argv[2]
+        with open("todo.txt","r+") as f:
+            data = set(f.read().splitlines())
+        data = data - {usr_input}
+        with open("todo.txt","w+") as f:
+            f.write()
+
+
+#     def report(self):
+#         """statistics"""
+
 if __name__ == "__main__":
-    user_inp = str(input("enter some task:  "))
     t = Todo()
-    parse_inp = t.parse_input(s=user_inp)
-    print(parse_inp)
-    t.add(s=parse_inp)
-    t.del_item()
+    if sys.argv.__len__() == 1: # this indicates user doesn't give any commands for the app
+        t.printHelp()
+    elif sys.argv[1] == "help":
+        t.printHelp()
+    else:
+        sys.stdout.buffer.write('Too Many Arguments for help! Please use "./todo help" for Usage Information'.encode('utf-8'))
+
+    if sys.argv[1] == "add":
+        t.add()
+    else:
+        sys.stdout.buffer.write('Too Many Arguments for help! Please use "./todo help" for Usage Information'.encode('utf-8'))
+
+    if sys.argv[1] == "done":
+        t.done()
+
+    
