@@ -67,36 +67,57 @@ import random
 
 # read_file("poem.txt")
 
-import json
-import sys
-# d = {"a":1}
-# d.update({"a":1})
-# print(d)
-# print("sayantan {}".format({1}))
-# sys.exit(0)
+# import json
+# import sys
+# # d = {"a":1}
+# # d.update({"a":1})
+# # print(d)
+# # print("sayantan {}".format({1}))
+# # sys.exit(0)
 
-from typing import List
-class Todo:
-    def __init__(self) -> None:
-        self.map1 = dict()
+# from typing import List
+# class Todo:
+#     def __init__(self) -> None:
+#         self.map1 = dict()
 
-    def insert(self,*key:List[str]):
-        for k in key:
-            print(k)
-            self.map1.update({k:True})
-        # print(self.map1)
-        return self.map1
+#     def insert(self,*key:List[str]):
+#         for k in key:
+#             print(k)
+#             self.map1.update({k:True})
+#         # print(self.map1)
+#         return self.map1
 
-    def save(self):
-        content = ""
-        for k in self.map1:
-            print(k)
-        #     record = "{}\t{}\n".format(k,v)
-        #     content = content + record
-        # with open("db_python.txt","w+",encoding="utf-8") as f:
-        #     f.write(content)
+#     def save(self):
+#         content = ""
+#         for k in self.map1:
+#             print(k)
+#         #     record = "{}\t{}\n".format(k,v)
+#         #     content = content + record
+#         # with open("db_python.txt","w+",encoding="utf-8") as f:
+#         #     f.write(content)
     
-if __name__ == "__main__":
-    t = Todo()
-    t.insert("eat rice","drink water")
-    t.save()
+# if __name__ == "__main__":
+#     t = Todo()
+#     t.insert("eat rice","drink water")
+#     t.save()
+
+import sys
+def gcd(a,b):
+    if b > a:
+        r = b % a
+        while r!=0:
+            b = a
+            a = r
+            r = b % a
+        return a
+    else:
+        return gcd(b,a)
+        
+def handling_env_cmd():
+    numbers = list(map(lambda x:int(x),sys.argv[1:]))
+    d = numbers[0]
+    for m in numbers[1:]:
+        d = gcd(d,m)
+    print("The greatest common divisor of {} is {}".format(numbers,d));
+handling_env_cmd()
+
