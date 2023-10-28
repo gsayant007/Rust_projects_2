@@ -10,7 +10,8 @@ use crate::flow_of_control::{if_else,break_continue,return_from_loops};
 mod reading_file;
 use crate::reading_file::read_file;
 mod todo_app;
-
+mod read_env_args;
+use read_env_args::read_env_args_func;
 pub fn main() {
     println!("hello world!");
     println!("I am a fellow Rustacean!");
@@ -23,5 +24,6 @@ pub fn main() {
     break_continue();
     println!("{:?}",return_from_loops());
     read_file();
+    read_env_args_func();
 
 }
